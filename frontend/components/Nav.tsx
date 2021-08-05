@@ -4,19 +4,19 @@ export default function Nav() {
   return (
     <nav>
       <Link href="/products">
-        <a> products </a>
+        <a> Products </a>
       </Link>
       <Link href="/sell">
-        <a> sell </a>
+        <a> Sell </a>
       </Link>
       <Link href="/orders">
-        <a> orders </a>
+        <a> Orders </a>
       </Link>
       <Link href="/account">
-        <a> account </a>
+        <a> Account </a>
       </Link>
       <Link href="/contacts">
-        <a> contacts </a>
+        <a> Contacts </a>
       </Link>
     </nav>
   );
