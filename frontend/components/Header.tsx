@@ -1,5 +1,5 @@
 import Link from 'next/link';
-
+import Nav from './Nav';
 export default function Header() {
   return (
     <div>
@@ -8,6 +8,7 @@ export default function Header() {
         <Link href="/">
           <a>logo</a>
         </Link>
+        <Nav />
       </div>
       <div className="sub-bar">
         <p>Search</p>
