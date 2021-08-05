@@ -9,7 +9,9 @@ export default function Header() {
           <a>logo</a>
         </Link>
       </div>
-      <div className="sub-bar"></div>
+      <div className="sub-bar">
+        <p>Search</p>
+      </div>
     </div>
   );
 }
