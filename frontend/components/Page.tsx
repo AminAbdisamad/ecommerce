@@ -17,6 +17,7 @@ html {
     --maxWidth:1000px;
     --bs: 'box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1)';
     box-sizing: border-box;
+    font-size: 62.5%;
 }
 *,*:after, *:before {
     box-sizing: inherit;
