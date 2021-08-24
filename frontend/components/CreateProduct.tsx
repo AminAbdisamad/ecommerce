@@ -1,22 +1,26 @@
 import * as React from 'react';
+import useForm from '../lib/useForm';
 
 const CreateProduct = () => {
-  const [name, setName] = React.useState('aminux');
+  const { inputs, handleChange } = useForm({
+    name: 'Macawis',
+    description: 'new and awesome',
+    price: 1234,
+  });
   return (
     <div>
       <form>
-        Name:
-        <input
-          type="text"
-          id="name"
-          name="name"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => {
-            console.log(e.target.value);
-            setName(e.target.value);
-          }}
-        />
+        <label htmlFor="name">
+          Name:
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Name"
+            value={inputs.name}
+            onChange={handleChange}
+          />
+        </label>
       </form>
     </div>
   );
