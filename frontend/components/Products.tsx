@@ -10,6 +10,7 @@ query ALL_PRODUCT_QEURY {
     name
     description
     status
+    price
   	photo{
      image{
       id
