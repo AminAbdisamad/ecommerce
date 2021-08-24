@@ -21,7 +21,7 @@ export default function Home() {
               }
             }
           }
-          user: _allUsersMeta {
+          User: _allUsersMeta {
             count
           }
         }

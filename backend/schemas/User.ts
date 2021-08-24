@@ -1,7 +1,7 @@
 import { list } from '@keystone-next/keystone/schema';
 import { text, relationship, password } from '@keystone-next/fields';
 
-export const user = list({
+export const User = list({
   // access
   // ui
   fields: {

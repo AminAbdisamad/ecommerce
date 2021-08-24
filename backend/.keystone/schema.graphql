@@ -1,9 +1,15 @@
 """ A keystone list """
-type user {
+type User {
   id: ID!
   name: String
   email: String
   password_is_set: Boolean
+  passwordResetToken_is_set: Boolean
+  passwordResetIssuedAt: String
+  passwordResetRedeemedAt: String
+  magicAuthToken_is_set: Boolean
+  magicAuthIssuedAt: String
+  magicAuthRedeemedAt: String
 }
 
 input UserWhereInput {
@@ -50,6 +56,40 @@ input UserWhereInput {
   email_in: [String]
   email_not_in: [String]
   password_is_set: Boolean
+  passwordResetToken_is_set: Boolean
+  passwordResetIssuedAt: String
+  passwordResetIssuedAt_not: String
+  passwordResetIssuedAt_lt: String
+  passwordResetIssuedAt_lte: String
+  passwordResetIssuedAt_gt: String
+  passwordResetIssuedAt_gte: String
+  passwordResetIssuedAt_in: [String]
+  passwordResetIssuedAt_not_in: [String]
+  passwordResetRedeemedAt: String
+  passwordResetRedeemedAt_not: String
+  passwordResetRedeemedAt_lt: String
+  passwordResetRedeemedAt_lte: String
+  passwordResetRedeemedAt_gt: String
+  passwordResetRedeemedAt_gte: String
+  passwordResetRedeemedAt_in: [String]
+  passwordResetRedeemedAt_not_in: [String]
+  magicAuthToken_is_set: Boolean
+  magicAuthIssuedAt: String
+  magicAuthIssuedAt_not: String
+  magicAuthIssuedAt_lt: String
+  magicAuthIssuedAt_lte: String
+  magicAuthIssuedAt_gt: String
+  magicAuthIssuedAt_gte: String
+  magicAuthIssuedAt_in: [String]
+  magicAuthIssuedAt_not_in: [String]
+  magicAuthRedeemedAt: String
+  magicAuthRedeemedAt_not: String
+  magicAuthRedeemedAt_lt: String
+  magicAuthRedeemedAt_lte: String
+  magicAuthRedeemedAt_gt: String
+  magicAuthRedeemedAt_gte: String
+  magicAuthRedeemedAt_in: [String]
+  magicAuthRedeemedAt_not_in: [String]
 }
 
 input UserWhereUniqueInput {
@@ -63,12 +103,26 @@ enum SortUsersBy {
   name_DESC
   email_ASC
   email_DESC
+  passwordResetIssuedAt_ASC
+  passwordResetIssuedAt_DESC
+  passwordResetRedeemedAt_ASC
+  passwordResetRedeemedAt_DESC
+  magicAuthIssuedAt_ASC
+  magicAuthIssuedAt_DESC
+  magicAuthRedeemedAt_ASC
+  magicAuthRedeemedAt_DESC
 }
 
 input UserUpdateInput {
   name: String
   email: String
   password: String
+  passwordResetToken: String
+  passwordResetIssuedAt: String
+  passwordResetRedeemedAt: String
+  magicAuthToken: String
+  magicAuthIssuedAt: String
+  magicAuthRedeemedAt: String
 }
 
 input UsersUpdateInput {
@@ -80,6 +134,12 @@ input UserCreateInput {
   name: String
   email: String
   password: String
+  passwordResetToken: String
+  passwordResetIssuedAt: String
+  passwordResetRedeemedAt: String
+  magicAuthToken: String
+  magicAuthIssuedAt: String
+  magicAuthRedeemedAt: String
 }
 
 input UsersCreateInput {
@@ -267,13 +327,13 @@ input _ListSchemaFieldsInput {
 }
 
 type Query {
-  """ Search for all user items which match the where clause. """
-  allUsers(where: UserWhereInput, search: String, sortBy: [SortUsersBy!], orderBy: String, first: Int, skip: Int): [user]
+  """ Search for all User items which match the where clause. """
+  allUsers(where: UserWhereInput, search: String, sortBy: [SortUsersBy!], orderBy: String, first: Int, skip: Int): [User]
 
-  """ Search for the user item with the matching ID. """
-  User(where: UserWhereUniqueInput!): user
+  """ Search for the User item with the matching ID. """
+  User(where: UserWhereUniqueInput!): User
 
-  """ Perform a meta-query on all user items which match the where clause. """
+  """ Perform a meta-query on all User items which match the where clause. """
   _allUsersMeta(where: UserWhereInput, search: String, sortBy: [SortUsersBy!], orderBy: String, first: Int, skip: Int): _QueryMeta
 
   """ Retrieve the meta-data for the User list. """
@@ -284,31 +344,63 @@ type Query {
 
   """The version of the Keystone application serving this API."""
   appVersion: String
+  authenticatedItem: AuthenticatedItem
   keystone: KeystoneMeta!
 }
 
 type Mutation {
-  """ Create a single user item. """
-  createUser(data: UserCreateInput): user
+  """ Create a single User item. """
+  createUser(data: UserCreateInput): User
 
-  """ Create multiple user items. """
-  createUsers(data: [UsersCreateInput]): [user]
+  """ Create multiple User items. """
+  createUsers(data: [UsersCreateInput]): [User]
 
-  """ Update a single user item by ID. """
-  updateUser(id: ID!, data: UserUpdateInput): user
+  """ Update a single User item by ID. """
+  updateUser(id: ID!, data: UserUpdateInput): User
 
-  """ Update multiple user items by ID. """
-  updateUsers(data: [UsersUpdateInput]): [user]
+  """ Update multiple User items by ID. """
+  updateUsers(data: [UsersUpdateInput]): [User]
 
-  """ Delete a single user item by ID. """
-  deleteUser(id: ID!): user
+  """ Delete a single User item by ID. """
+  deleteUser(id: ID!): User
 
-  """ Delete multiple user items by ID. """
-  deleteUsers(ids: [ID!]): [user]
+  """ Delete multiple User items by ID. """
+  deleteUsers(ids: [ID!]): [User]
+  authenticateUserWithPassword(email: String!, password: String!): UserAuthenticationWithPasswordResult!
+  createInitialUser(data: CreateInitialUserInput!): UserAuthenticationWithPasswordSuccess!
+  endSession: Boolean!
 }
 
 """The `Upload` scalar type represents a file upload."""
 scalar Upload
+
+union AuthenticatedItem = User
+
+union UserAuthenticationWithPasswordResult = UserAuthenticationWithPasswordSuccess | UserAuthenticationWithPasswordFailure
+
+type UserAuthenticationWithPasswordSuccess {
+  sessionToken: String!
+  item: User!
+}
+
+type UserAuthenticationWithPasswordFailure {
+  code: PasswordAuthErrorCode!
+  message: String!
+}
+
+enum PasswordAuthErrorCode {
+  FAILURE
+  IDENTITY_NOT_FOUND
+  SECRET_NOT_SET
+  MULTIPLE_IDENTITY_MATCHES
+  SECRET_MISMATCH
+}
+
+input CreateInitialUserInput {
+  name: String
+  email: String
+  password: String
+}
 
 type KeystoneMeta {
   adminMeta: KeystoneAdminMeta!
