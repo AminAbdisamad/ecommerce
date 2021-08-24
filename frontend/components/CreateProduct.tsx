@@ -2,7 +2,7 @@ import * as React from 'react';
 import useForm from '../lib/useForm';
 
 const CreateProduct = () => {
-  const { inputs, handleChange } = useForm({
+  const { resetForm, clearForm, inputs, handleChange } = useForm({
     name: 'Macawis',
     description: 'new and awesome',
     price: 1234,
@@ -32,6 +32,12 @@ const CreateProduct = () => {
             onChange={handleChange}
           />
         </label>
+        <button type="button" onClick={clearForm}>
+          Clear Form
+        </button>
+        <button type="button" onClick={resetForm}>
+          Reset Form
+        </button>
       </form>
     </div>
   );
