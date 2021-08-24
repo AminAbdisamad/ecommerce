@@ -16,8 +16,6 @@ export async function insertSeedData(ks: any) {
     await mongoose.model('Product').create(product);
   }
   console.log(`✅ Seed Data Inserted: ${products.length} Products`);
-  console.log(
-    `👋 Please start the process with \`yarn dev\` or \`npm run dev\``
-  );
+  console.log('👋 Please start the process with `yarn dev` or `npm run dev`');
   process.exit();
 }
