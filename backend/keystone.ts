@@ -4,8 +4,11 @@ import {
   withItemData,
   statelessSessions,
 } from '@keystone-next/keystone/session';
+import { ProductImage } from './schemas/ProductImage';
+import { Product } from './schemas/Product';
 import { User } from './schemas/User';
 import 'dotenv/config';
+import { insertSeedData } from './data';
 
 const databaseURL = process.env.DATABASE_URL;
 
@@ -34,9 +37,18 @@ export default withAuth(
     db: {
       adapter: 'mongoose',
       url: databaseURL,
+      async onConnect(keystone) {
+        console.log('connected to the database');
+        // Only insert
+        if (process.argv.includes('--data')) {
+          await insertSeedData(keystone);
+        }
+      },
     },
     lists: createSchema({
       User,
+      Product,
+      ProductImage,
     }),
     ui: {
       isAccessAllowed: ({ session }) => {
