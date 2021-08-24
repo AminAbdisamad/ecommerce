@@ -18,7 +18,7 @@ Router.events.on('routeChangeError', () => {
 });
 
 function MyApp({ Component, pageProps, apollo }) {
-  console.log(apollo);
+  // console.log(apollo);
   return (
     <ApolloProvider client={apollo}>
       <Page>
@@ -37,5 +37,5 @@ MyApp.getInitialProps = async function ({ Component, ctx }) {
   pageProps.query = ctx.query;
   return { pageProps };
 };
-
+//@ts-ignore
 export default withData(MyApp);
