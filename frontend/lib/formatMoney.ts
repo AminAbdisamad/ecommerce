@@ -1,9 +1,13 @@
-const formatter = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
-});
+export default function formatMoney(amount = 0): string {
+  const options = {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+  };
+  if (amount % 100 === 0) {
+    options.minimumFractionDigits = 0;
+  }
 
-export default function formatMoney(cents: number): string {
-  const dollars = cents / 100;
-  return formatter.format(dollars);
+  const formatter = new Intl.NumberFormat('en-US', options);
+  return formatter.format(amount / 100);
 }
