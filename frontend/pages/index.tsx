@@ -1,3 +1,1 @@
-export default function Index() {
-  return <h1>I'm index page</h1>;
-}
+export { default } from './products'; // Export & Import in one line

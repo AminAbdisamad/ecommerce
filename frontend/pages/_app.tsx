@@ -3,6 +3,8 @@ import type { AppProps } from 'next/app';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import Router from 'next/router';
+import { ApolloProvider } from '@apollo/client';
+import withData from '../lib/withData';
 
 // Adding Loader When transitioning from pages
 Router.events.on('routeChangeStart', () => {
@@ -15,10 +17,25 @@ Router.events.on('routeChangeError', () => {
   NProgress.done();
 });
 
-export default function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps, apollo }) {
+  console.log(apollo);
   return (
-    <Page>
-      <Component {...pageProps} />
-    </Page>
+    <ApolloProvider client={apollo}>
+      <Page>
+        <Component {...pageProps} />
+      </Page>
+    </ApolloProvider>
   );
 }
+
+// Make Apollo  & Nextjs work together
+MyApp.getInitialProps = async function ({ Component, ctx }) {
+  let pageProps: any = {};
+  if (Component.getInitialProps) {
+    pageProps = await Component.getInitialProps(ctx);
+  }
+  pageProps.query = ctx.query;
+  return { pageProps };
+};
+
+export default withData(MyApp);
