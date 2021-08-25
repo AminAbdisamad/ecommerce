@@ -9,7 +9,10 @@ import formatMoney from '../lib/formatMoney';
 const Product = ({ product }) => {
   return (
     <ItemStyles>
-      <img src={product.photo.image.publicUrlTransformed} alt={product.name} />
+      <img
+        src={product?.photo?.image?.publicUrlTransformed}
+        alt={product.name}
+      />
       <Title>
         <Link href={`product/${product.id}`}>{product.name}</Link>
       </Title>
