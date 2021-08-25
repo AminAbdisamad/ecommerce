@@ -3,7 +3,10 @@ import qql from 'graphql-tag';
 import styled from 'styled-components';
 import Product from './Product';
 import { ProductTypes } from './Types';
-const ALL_PRODUCT_QEURY = qql`
+
+
+
+export const ALL_PRODUCT_QEURY = qql`
 query ALL_PRODUCT_QEURY {
   allProducts{
     id
