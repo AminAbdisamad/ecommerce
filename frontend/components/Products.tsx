@@ -4,8 +4,6 @@ import styled from 'styled-components';
 import Product from './Product';
 import { ProductTypes } from './Types';
 
-
-
 export const ALL_PRODUCT_QEURY = qql`
 query ALL_PRODUCT_QEURY {
   allProducts{
