@@ -53,7 +53,7 @@ export default function UpdateProduct({ id }) {
   const { inputs, handleChange } = useForm(
     data?.Product || {
       name: '',
-      price: '',
+      price: 0,
       description: '',
     }
   );
