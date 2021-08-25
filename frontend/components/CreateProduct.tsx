@@ -5,6 +5,7 @@ import Form from './styles/Form';
 import { useMutation } from '@apollo/client';
 import DisplayError from '../lib/DisplayError';
 import { ALL_PRODUCT_QEURY } from './Products';
+import Router from 'next/router';
 
 const CREATE_PRODUCT_MUTATION = gql`
   mutation CREATE_PRODUCT_MUTATION(
@@ -49,6 +50,7 @@ const CreateProduct = () => {
       ],
     }
   );
+  console.log('DATA', data);
 
   return (
     <div>
@@ -58,8 +60,11 @@ const CreateProduct = () => {
           //   console.log(inputs);
           //   const res = await createProduct({ variables: inputs });
           const res = await createProduct();
-          console.log(res);
+
           clearForm();
+          Router.push({
+            pathname: `/product/${res.data.createProduct.id}`,
+          });
         }}
       >
         <DisplayError error={error} />
