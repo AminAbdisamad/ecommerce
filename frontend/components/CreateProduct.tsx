@@ -3,6 +3,8 @@ import gql from 'graphql-tag';
 import useForm from '../lib/useForm';
 import Form from './styles/Form';
 import { useMutation } from '@apollo/client';
+import DisplayError from '../lib/DisplayError';
+import { ALL_PRODUCT_QEURY } from './Products';
 
 const CREATE_PRODUCT_MUTATION = gql`
   mutation CREATE_PRODUCT_MUTATION(
@@ -14,8 +16,8 @@ const CREATE_PRODUCT_MUTATION = gql`
     createProduct(
       data: {
         name: $name
-        description: $description
         price: $price
+        description: $description
         status: "AVAILABLE"
         photo: { create: { image: $image, altText: $name } } # Photo is a separate record, this is Specific to KeystoneJS
       }
@@ -37,7 +39,15 @@ const CreateProduct = () => {
 
   const [createProduct, { data, loading, error }] = useMutation(
     CREATE_PRODUCT_MUTATION,
-    { variables: inputs }
+    {
+      variables: inputs,
+      // We want to refresh / refetch to get the new item added
+      refetchQueries: [
+        {
+          query: ALL_PRODUCT_QEURY,
+        },
+      ],
+    }
   );
 
   return (
@@ -46,12 +56,14 @@ const CreateProduct = () => {
         onSubmit={async (e) => {
           e.preventDefault();
           //   console.log(inputs);
+          //   const res = await createProduct({ variables: inputs });
           const res = await createProduct();
           console.log(res);
           clearForm();
         }}
       >
-        <fieldset>
+        <DisplayError error={error} />
+        <fieldset disabled={loading} aria-busy={loading}>
           <label htmlFor="image">
             Image:
             <input
