@@ -22,7 +22,7 @@ const GET_SINGLE_PRODUCT = gql`
   }
 `;
 
-export interface Product {
+interface Product {
   id: string;
   name: string;
   description: string;
