@@ -3,6 +3,14 @@ import * as React from 'react';
 export default function useForm(initial = {}) {
   const [inputs, setInputs] = React.useState(initial);
 
+  //   Fix for wait item to load
+
+  const initValues = Object.values(initial).join('');
+
+  React.useEffect(() => {
+    setInputs(initial);
+  }, [initValues]);
+
   function handleChange(e) {
     let { name, type, value } = e.target;
     if (type === 'number') {
