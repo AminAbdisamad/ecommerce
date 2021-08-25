@@ -19,6 +19,7 @@ const Product = ({ product }) => {
       <PriceTag>{formatMoney(product.price)}</PriceTag>
       <p>{product.description}</p>
       {/* btn  */}
+      <button>Update Me</button>
     </ItemStyles>
   );
 };
