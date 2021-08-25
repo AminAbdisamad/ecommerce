@@ -50,7 +50,6 @@ const CreateProduct = () => {
       ],
     }
   );
-  console.log('DATA', data);
 
   return (
     <div>
