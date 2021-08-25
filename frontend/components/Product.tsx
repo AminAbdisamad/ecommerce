@@ -6,8 +6,9 @@ import ItemStyles from './styles/ItemStyles';
 import Title from './styles/Title';
 import PriceTag from './styles/PriceTagStyle';
 import formatMoney from '../lib/formatMoney';
+import DeleteProduct from './DeleteProduct';
 
-const Product = ({ product }) => {
+const Product: React.FC<{ product: ProductTypes }> = ({ product }) => {
   return (
     <ItemStyles>
       <img
@@ -30,6 +31,7 @@ const Product = ({ product }) => {
       >
         <button>Edit</button>
       </Link>
+      <DeleteProduct id={product.id} />
     </ItemStyles>
   );
 };
