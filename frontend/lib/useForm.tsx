@@ -1,6 +1,13 @@
 import * as React from 'react';
 
-export default function useForm(initial = {}) {
+export interface FormTypes {
+  name?: string;
+  description?: string;
+  price?: number;
+  status?: string;
+  photo?: Object;
+}
+export default function useForm(initial: FormTypes = {}) {
   const [inputs, setInputs] = React.useState(initial);
 
   //   Fix for wait item to load
