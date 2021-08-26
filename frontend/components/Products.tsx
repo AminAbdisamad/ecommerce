@@ -1,24 +1,27 @@
 import { useQuery } from '@apollo/client';
-import qql from 'graphql-tag';
+import gql from 'graphql-tag';
 import styled from 'styled-components';
+import { perPage } from '../config';
 import Product from './Product';
 import { ProductTypes } from './Types';
 
-export const ALL_PRODUCT_QEURY = qql`
-query ALL_PRODUCT_QEURY {
-  allProducts{
-    id
-    name
-    description
-    status
-    price
-  	photo{
-     image{
+export const ALL_PRODUCT_QEURY = gql`
+  query ALL_PRODUCT_QEURY($skip: Int = 0, $first: Int) {
+    allProducts(skip: $skip, first: $first) {
       id
-      publicUrlTransformed
+      name
+      description
+      status
+      price
+      photo {
+        image {
+          id
+          publicUrlTransformed
+        }
+      }
     }
-    }
-  }}`;
+  }
+`;
 
 const ProductListStyle = styled.div`
   display: grid;
@@ -26,9 +29,13 @@ const ProductListStyle = styled.div`
   grid-gap: 60px;
 `;
 
-const Products = () => {
-  const { data, error, loading } = useQuery(ALL_PRODUCT_QEURY);
-  console.log(data, error, loading);
+const Products: React.FC<{ page: number }> = ({ page }) => {
+  const { data, error, loading } = useQuery(ALL_PRODUCT_QEURY, {
+    variables: {
+      skip: page * perPage - perPage,
+      first: perPage,
+    },
+  });
 
   if (loading) {
     return <p>Loading products ...</p>;
