@@ -1,5 +1,4 @@
 import Page from '../components/Page';
-import type { AppProps } from 'next/app';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import Router from 'next/router';
@@ -31,7 +30,7 @@ function MyApp({ Component, pageProps, apollo }) {
 
 // Make Apollo  & Nextjs work together
 MyApp.getInitialProps = async function ({ Component, ctx }) {
-  let pageProps: any = {};
+  let pageProps = {};
   if (Component.getInitialProps) {
     pageProps = await Component.getInitialProps(ctx);
   }
