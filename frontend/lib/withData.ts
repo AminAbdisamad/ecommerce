@@ -4,6 +4,7 @@ import { getDataFromTree } from '@apollo/client/react/ssr';
 import { createUploadLink } from 'apollo-upload-client';
 import withApollo from 'next-with-apollo';
 import { endpoint, prodEndpoint } from '../config';
+import paginationField from './paginationField';
 
 function createClient({ headers, initialState }) {
   return new ApolloClient({
@@ -35,7 +36,10 @@ function createClient({ headers, initialState }) {
         Query: {
           fields: {
             // TODO: We will add this together!
-            // allProducts: paginationField(),
+            // ! Using pagination :- When you delete item from the pagination we need to remove that item from apollo cache
+            // !without reseting application cache
+            // @ts-ignore
+            allProducts: paginationField(),
           },
         },
       },
