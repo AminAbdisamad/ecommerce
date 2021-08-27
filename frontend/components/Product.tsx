@@ -7,8 +7,10 @@ import Title from './styles/Title';
 import PriceTag from './styles/PriceTagStyle';
 import formatMoney from '../lib/formatMoney';
 import DeleteProduct from './DeleteProduct';
+import useUser from './User';
 
 const Product: React.FC<{ product: ProductTypes }> = ({ product }) => {
+  const user = useUser();
   return (
     <ItemStyles>
       <img
@@ -21,17 +23,21 @@ const Product: React.FC<{ product: ProductTypes }> = ({ product }) => {
       <PriceTag>{formatMoney(product.price)}</PriceTag>
       <p>{product.description}</p>
       {/* btn  */}
-      <Link
-        href={{
-          pathname: 'update',
-          query: {
-            id: product.id,
-          },
-        }}
-      >
-        <button>Edit</button>
-      </Link>
-      <DeleteProduct id={product.id} />
+      {user && (
+        <>
+          <Link
+            href={{
+              pathname: 'products/update',
+              query: {
+                id: product.id,
+              },
+            }}
+          >
+            <button>Edit</button>
+          </Link>
+          <DeleteProduct id={product.id} />
+        </>
+      )}
     </ItemStyles>
   );
 };
