@@ -4,7 +4,6 @@ export default function paginationField() {
   return {
     keyArgs: false, // tells apollo we handle pagination by ourselves
     read(exisiting = [], { args, cache }) {
-      console.log({ exisiting, args, cache });
       const { skip, first: perPage } = args;
       //   Read number of items on page from the cache
       const data = cache.readQuery({ query: PAGINATION_COUNT });
@@ -17,12 +16,9 @@ export default function paginationField() {
       //   Lets say your perPage is set to 4, perPage=4
       // and you there's only 2 items left
       // We need to display
-      console.log(items.length && items.length !== perPage && page === pages);
-      console.log({ skip, page, pages });
+
       if (items.length && items.length !== perPage && page === pages) {
         //   We're in the page which don't satisfy perPage
-
-        console.log(' WAA IKAN');
 
         return items;
       }
@@ -46,7 +42,7 @@ export default function paginationField() {
     merge(existing: Array<[]>, incoming: Array<[]>, { args }) {
       const { skip, first: perPage } = args;
       // Run when apollo comes back from request with our data
-      console.log('Merging items ....' + incoming.length);
+      //   console.log('Merging items ....' + incoming.length);
 
       //   Merge & if there are existing items will take copy of them otherwise
       const merged = existing ? existing.slice(0) : [];
