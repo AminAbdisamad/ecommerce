@@ -12,7 +12,6 @@ const DELETE_PRODUCT_MUTATION = gql`
   }
 `;
 const update = (cache: any, payload: any) => {
-  console.log({ payload });
   // Get item from apollo cache and remove
   // uses type and id ex. Product:424274827847
   cache.evict(cache.identify(payload.data.deleteProduct));
@@ -33,7 +32,6 @@ const DeleteProduct: React.FC<{ id: string }> = ({ id }) => {
           if (confirm('Are you sure to delete?')) {
             await deleteProduct().catch((err) => alert(err.message));
             alert(`Product  deleted successfully`);
-            console.log(deleteProduct);
           }
         }}
       >
