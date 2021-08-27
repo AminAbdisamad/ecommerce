@@ -6,6 +6,8 @@ export interface FormTypes {
   price?: number;
   status?: string;
   photo?: Object;
+  email?: string;
+  password?: string;
 }
 export default function useForm(initial: FormTypes = {}) {
   const [inputs, setInputs] = React.useState(initial);
