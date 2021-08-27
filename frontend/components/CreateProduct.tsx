@@ -56,7 +56,7 @@ const CreateProduct = () => {
       <Form
         onSubmit={async (e) => {
           e.preventDefault();
-          //   console.log(inputs);
+
           //   const res = await createProduct({ variables: inputs });
           const res = await createProduct();
 
