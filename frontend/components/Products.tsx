@@ -30,7 +30,7 @@ const ProductListStyle = styled.div`
 `;
 
 const Products: React.FC<{ page: number }> = ({ page }) => {
-  const { data, error, loading } = useQuery(ALL_PRODUCT_QEURY, {
+  const { data, error, loading, fetchMore } = useQuery(ALL_PRODUCT_QEURY, {
     variables: {
       skip: page * perPage - perPage,
       first: perPage,
