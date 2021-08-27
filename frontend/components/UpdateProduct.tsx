@@ -79,7 +79,6 @@ export default function UpdateProduct({ id }) {
               price: inputs.price,
             },
           });
-          console.log(res);
         }}
       >
         <DisplayError error={error} />
