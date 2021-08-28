@@ -1,4 +1,5 @@
 import { createTransport } from 'nodemailer';
+import 'dotenv/config';
 
 const transport = createTransport({
   host: process.env.MAIL_HOST,
@@ -8,6 +9,12 @@ const transport = createTransport({
     pass: process.env.MAIL_PASS,
   },
 });
+
+console.log(process.env.HOST);
+console.log(process.env.MAIL_PORT);
+console.log(process.env.MAIL_HOST);
+console.log(process.env.MAIL_PASS);
+console.log(process.env.MAIL_USER);
 
 function makeEmail(text: string): string {
   return `

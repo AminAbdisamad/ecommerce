@@ -1,4 +1,4 @@
-import { useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import useForm from '../lib/useForm';
 import Form from './styles/Form';
 import gql from 'graphql-tag';
@@ -6,30 +6,34 @@ import { CURRENT_USER } from './User';
 
 const REQUEST_RESET_MUTATION = gql`
   mutation REQUEST_RESET_MUTATION($email: String!) {
-    sendUserPasswordLink(email: $email) {
-      id
-      name
-      email
+    sendUserPasswordResetLink(email: $email) {
+      code
+      message
     }
   }
 `;
+
 const RequestReset = () => {
+  // ! Before anything check if ther provided email exist
+
   const { inputs, handleChange, clearForm } = useForm({
     email: '',
   });
-  const [signup, { data, loading, error }] = useMutation(
+
+  // ? TODO? improve this later
+
+  const [requestReset, { data, loading, error }] = useMutation(
     REQUEST_RESET_MUTATION,
     {
       variables: inputs,
-      // When user signs we want to refech and sign user
-      // refetchQueries: [{ query: CURRENT_USER }],
     }
   );
+  console.log({ data, loading, error });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await signup().catch(console.error);
-
+    const res = await requestReset().catch(console.error);
+    console.log(res);
     clearForm();
     // Redirect to home page when signed in sucess
   };
@@ -40,6 +44,9 @@ const RequestReset = () => {
 
       <Form onSubmit={handleSubmit}>
         <fieldset>
+          {data?.sendUserPasswordResetLink === null && (
+            <p>If that email exist, we have sent Password Forget Link</p>
+          )}
           <label htmlFor="email">
             Email:{' '}
             <input
