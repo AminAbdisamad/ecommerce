@@ -9,6 +9,7 @@ import { Product } from './schemas/Product';
 import { User } from './schemas/User';
 import 'dotenv/config';
 import { insertSeedData } from './data';
+import { sendPasswordResetEmail } from './lib/mail';
 
 const databaseURL = process.env.DATABASE_URL;
 
@@ -23,6 +24,12 @@ const { withAuth } = createAuth({
   secretField: 'password',
   initFirstItem: {
     fields: ['name', 'email', 'password'],
+  },
+  passwordResetLink: {
+    async sendToken(args) {
+      // await args;
+      await sendPasswordResetEmail(args.identity, args.token);
+    },
   },
 });
 
