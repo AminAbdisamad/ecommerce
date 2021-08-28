@@ -4,6 +4,7 @@ import SignIn from '../components/SignIn';
 import useUser from '../components/User';
 import styled from 'styled-components';
 import SignUp from '../components/SignUp';
+import RequestReset from '../components/RequestReset';
 
 const GridStyles = styled.div`
   display: grid;
@@ -20,6 +21,7 @@ export default function SignInPage() {
       {/* {!user && <SignIn />} */}
       <SignIn />
       <SignUp />
+      <RequestReset />
     </GridStyles>
   );
 }
