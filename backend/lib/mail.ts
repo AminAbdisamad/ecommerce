@@ -1,4 +1,4 @@
-import { createTransport } from 'nodemailer';
+import { createTransport, getTestMessageUrl } from 'nodemailer';
 import 'dotenv/config';
 
 const transport = createTransport({
@@ -9,12 +9,6 @@ const transport = createTransport({
     pass: process.env.MAIL_PASS,
   },
 });
-
-console.log(process.env.HOST);
-console.log(process.env.MAIL_PORT);
-console.log(process.env.MAIL_HOST);
-console.log(process.env.MAIL_PASS);
-console.log(process.env.MAIL_USER);
 
 function makeEmail(text: string): string {
   return `
@@ -32,6 +26,21 @@ function makeEmail(text: string): string {
             <p>Commerce, </p>
         </div>
         `;
+}
+export interface Envelope {
+  from: string;
+  to?: null[] | null;
+}
+
+export interface Info {
+  accepted?: string[] | null;
+  rejected?: null[] | null;
+  envelopeTime: number;
+  messageTime: number;
+  messageSize: number;
+  response: string;
+  envelope: Envelope;
+  messageId: string;
 }
 
 export async function sendPasswordResetEmail(
@@ -51,4 +60,7 @@ export async function sendPasswordResetEmail(
     ),
   });
   console.log({ info });
+  if (process.env.MAIL_USER?.includes('ethereal.email')) {
+    console.log(`Message sent from ${getTestMessageUrl(info)}`);
+  }
 }

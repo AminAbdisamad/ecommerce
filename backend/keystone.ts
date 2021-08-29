@@ -4,6 +4,7 @@ import {
   withItemData,
   statelessSessions,
 } from '@keystone-next/keystone/session';
+import { CartItem } from './schemas/CartItem';
 import { ProductImage } from './schemas/ProductImage';
 import { Product } from './schemas/Product';
 import { User } from './schemas/User';
@@ -22,6 +23,7 @@ const { withAuth } = createAuth({
   listKey: 'User',
   identityField: 'email',
   secretField: 'password',
+  sessionData: 'id name isAdmin',
   initFirstItem: {
     fields: ['name', 'email', 'password'],
   },
@@ -56,10 +58,11 @@ export default withAuth(
       User,
       Product,
       ProductImage,
+      CartItem,
     }),
     ui: {
       isAccessAllowed: ({ session }) => {
-        console.log(session);
+        console.log('Logged In User Info ', session);
         return !!session?.data;
       },
     },
