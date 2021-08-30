@@ -5,7 +5,7 @@
   "author": "Amin Abdisamad",
   "license": "MIT",
   "scripts": {
-    "dev": "keystone-next",
+    "dev": "keystone-next", 
     "seed-data": "keystone-next --data"
   },
   "eslintConfig": {
