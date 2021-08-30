@@ -5,6 +5,7 @@ import CartItem from './CartItem';
 import formatMoney from '../lib/formatMoney';
 import calculateTotalPrice from '../lib/calculateTotalPrice';
 import { useCart } from '../lib/globalState';
+
 export default function Cart() {
   const { openCart, cartOpen, setCartOpen, closeCart } = useCart();
 
