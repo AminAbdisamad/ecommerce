@@ -3,7 +3,6 @@ import gql from 'graphql-tag';
 import DisplayError from '../lib/DisplayError';
 import useForm from '../lib/useForm';
 import { ProductDataTypes } from '../pages/product/[id]';
-import Product from './Product';
 import Form from './styles/Form';
 
 const GET_SINGLE_PRODUCT = gql`
