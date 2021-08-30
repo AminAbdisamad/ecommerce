@@ -31,5 +31,8 @@ export const Product = list({
         inlineEdit: { fields: ['image', 'altText'] },
       },
     }),
+    cart: relationship({
+      ref: 'CartItem.product',
+    }),
   },
 });

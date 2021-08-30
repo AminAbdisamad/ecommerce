@@ -1,5 +1,5 @@
 import { list } from '@keystone-next/keystone/schema';
-import { text, relationship, password } from '@keystone-next/fields';
+import { text, relationship, password, checkbox } from '@keystone-next/fields';
 
 export const User = list({
   // access
@@ -7,6 +7,23 @@ export const User = list({
   fields: {
     name: text({ isRequired: true }),
     email: text({ isRequired: true, isUnique: true }),
+    isAdmin: checkbox(),
     password: password(),
+    cart: relationship({
+      ref: 'CartItem.user',
+      many: true,
+    }),
+  },
+
+  ui: {
+    // createView: {
+    //   defaultFieldMode: 'hiden',
+    // },
+    // itemView:{
+    //   fieldMo
+    // }
+    createView: { fieldMode: 'hidden' },
+    // listView: { fieldMode: 'hidden' },
+    itemView: { fieldMode: 'read' },
   },
 });
