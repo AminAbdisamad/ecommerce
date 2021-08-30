@@ -1,10 +1,12 @@
 import Link from 'next/link';
 import styled from 'styled-components';
+import { useCart } from '../lib/globalState';
 import SignOut from './SignOut';
 import NavStyles from './styles/NavStyles';
 import useUser from './User';
 
 export default function Nav() {
+  const { openCart } = useCart();
   const user = useUser();
 
   return (
@@ -19,6 +21,9 @@ export default function Nav() {
           <Link href="/orders">Orders</Link>
           <Link href="/account">Account </Link>
           <SignOut />
+          <button type="button" onClick={openCart}>
+            My Cart
+          </button>
         </>
       )}
       {!user && (
