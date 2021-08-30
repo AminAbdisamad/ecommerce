@@ -14,7 +14,7 @@ const REQUEST_RESET_MUTATION = gql`
 `;
 
 const RequestReset = () => {
-  // ! Before anything check if ther provided email exist
+  // ! Custome Mutations - Before anything check if ther provided email exist
 
   const { inputs, handleChange, clearForm } = useForm({
     email: '',

@@ -4,6 +4,7 @@ import 'nprogress/nprogress.css';
 import Router from 'next/router';
 import { ApolloProvider } from '@apollo/client';
 import withData from '../lib/withData';
+import { CartStateProvider } from '../lib/globalState';
 
 // Adding Loader When transitioning from pages
 Router.events.on('routeChangeStart', () => {
@@ -21,9 +22,11 @@ function MyApp({ Component, pageProps, apollo }) {
 
   return (
     <ApolloProvider client={apollo}>
-      <Page>
-        <Component {...pageProps} />
-      </Page>
+      <CartStateProvider>
+        <Page>
+          <Component {...pageProps} />
+        </Page>
+      </CartStateProvider>
     </ApolloProvider>
   );
 }

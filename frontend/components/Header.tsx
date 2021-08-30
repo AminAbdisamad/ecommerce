@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import styled from 'styled-components';
+import { useCart } from '../lib/globalState';
+import Cart from './Cart';
 import Nav from './Nav';
 const Logo = styled.h1`
   margin-top: 0;
@@ -20,12 +22,15 @@ const HeaderStyle = styled.header`
 `;
 
 const Header = () => {
+ 
   return (
     <HeaderStyle>
       <Logo>
         <Link href="/">Commerce</Link>
       </Logo>
       <Nav />
+
+      <Cart />
     </HeaderStyle>
   );
 };
