@@ -2,7 +2,7 @@ import * as React from 'react';
 import { CartEntity } from './Types';
 import styled from 'styled-components';
 import formatMoney from '../lib/formatMoney';
-import Product from './Product';
+
 const CartItemStyles = styled.div`
   padding: 1rem;
   border-bottom: 1px solid var(--secondaryColor);
@@ -16,6 +16,7 @@ const CartItemStyles = styled.div`
     margin: 0;
   }
 `;
+
 const CartItem: React.FC<{ cart: CartEntity }> = ({ cart }) => {
   return (
     <CartItemStyles>

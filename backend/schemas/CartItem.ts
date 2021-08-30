@@ -1,5 +1,5 @@
 import { list } from '@keystone-next/keystone/schema';
-import { text, relationship, password, integer } from '@keystone-next/fields';
+import { relationship, integer } from '@keystone-next/fields';
 
 export const CartItem = list({
   // access
