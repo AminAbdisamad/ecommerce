@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import { CURRENT_USER } from './User';
 
-const ADD_TO_CART_MUTATION = gql`
+export const ADD_TO_CART_MUTATION = gql`
   mutation ADD_TO_CART_MUTATION($productId: ID!) {
     addToCart(productId: $productId) {
       quantity
@@ -16,7 +16,7 @@ const ADD_TO_CART_MUTATION = gql`
 `;
 
 const AddToCart: React.FC<{ productId: string }> = ({ productId }) => {
-  const [addToCart, { loading }] = useMutation(ADD_TO_CART_MUTATION, {
+  const [addItemToCart, { loading }] = useMutation(ADD_TO_CART_MUTATION, {
     variables: {
       productId: productId,
     },
@@ -25,13 +25,7 @@ const AddToCart: React.FC<{ productId: string }> = ({ productId }) => {
 
   return (
     <div>
-      <button
-        type="button"
-        disabled={loading}
-        onClick={async () => {
-          await addToCart();
-        }}
-      >
+      <button type="button" disabled={loading} onClick={addItemToCart}>
         Add{loading && 'ing'} To Cart
       </button>
     </div>

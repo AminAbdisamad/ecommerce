@@ -32,7 +32,9 @@ const Pagination: React.FC<{ page: number }> = ({ page }) => {
     <>
       <PaginationStyles>
         <Head>
-          <title>E commerce | Page {page} of _ </title>
+          <title>
+            E commerce | Page {page} of {count}
+          </title>
         </Head>
         <Link href={`/products/${page - 1}`}>
           <a aria-disabled={page <= 1}>Previous </a>

@@ -1,22 +1,24 @@
 import styled, { keyframes } from 'styled-components';
 
 const DropDown = styled.div`
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
   position: absolute;
-  width: 100%;
+  width: 80%;
   z-index: 2;
-  border: 1px solid var(--lightGray);
+  /* border-radius: 5rem; */
+  margin-top: 0.5rem;
 `;
 
 const DropDownItem = styled.div`
-  border-bottom: 1px solid var(--lightGray);
+  border-bottom: 1px solid #dfdfdf;
   background: ${(props) => (props.highlighted ? '#f7f7f7' : 'white')};
   padding: 1rem;
   transition: all 0.2s;
   ${(props) => (props.highlighted ? 'padding-left: 2rem;' : null)};
   display: flex;
   align-items: center;
-  border-left: 10px solid
-    ${(props) => (props.highlighted ? props.theme.lightgrey : 'white')};
+  border-left: 0.4rem solid
+    ${(props) => (props.highlighted ? props.theme.primaryColor : 'white')};
   img {
     margin-right: 10px;
   }
@@ -34,10 +36,13 @@ const glow = keyframes`
 
 const SearchStyles = styled.div`
   position: relative;
+
   input {
-    width: 100%;
+    width: 80%;
     padding: 10px;
-    border: 0;
+    border: 1px solid var(--primaryColor);
+    border-radius: 3px;
+
     font-size: 2rem;
     &.loading {
       animation: ${glow} 0.5s ease-in-out infinite alternate;

@@ -33,6 +33,7 @@ export const Product = list({
     }),
     cart: relationship({
       ref: 'CartItem.product',
+      many: true,
     }),
   },
 });

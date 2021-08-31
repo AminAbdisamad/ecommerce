@@ -8,7 +8,7 @@ import PriceTag from './styles/PriceTagStyle';
 import formatMoney from '../lib/formatMoney';
 import DeleteProduct from './DeleteProduct';
 import useUser from './User';
-import AddToCart from './AddToCart';
+import AddItemToCart from './AddItemToCart';
 
 const ButtonSyles = styled.div`
   display: flex;
@@ -44,7 +44,7 @@ const Product: React.FC<{ product: ProductTypes }> = ({ product }) => {
           >
             <button type="button">Edit Product</button>
           </Link>
-          <AddToCart productId={product.id} />
+          <AddItemToCart productId={product.id} />
           <DeleteProduct id={product.id} />
         </ButtonSyles>
       )}
