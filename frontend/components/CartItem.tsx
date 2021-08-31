@@ -2,6 +2,7 @@ import * as React from 'react';
 import { CartEntity } from './Types';
 import styled from 'styled-components';
 import formatMoney from '../lib/formatMoney';
+import DeleteFromCart from './DeleteFromCart';
 
 const CartItemStyles = styled.div`
   padding: 1rem;
@@ -33,6 +34,7 @@ const CartItem: React.FC<{ cart: CartEntity }> = ({ cart }) => {
           </em>
         </p>
       </div>
+      <DeleteFromCart cartId={cart.id} />
     </CartItemStyles>
   );
 };
