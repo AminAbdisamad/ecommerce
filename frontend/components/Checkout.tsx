@@ -14,7 +14,7 @@ const CheckoutFormStyles = styled.form`
 
 const stripeLib = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
 
-const Checkout = () => {
+const CheckoutFrom = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Series business is about to start');
@@ -28,5 +28,7 @@ const Checkout = () => {
     </Elements>
   );
 };
+
+const Checkout = () => {};
 
 export default Checkout;
