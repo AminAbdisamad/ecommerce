@@ -29,6 +29,12 @@ const CheckoutFrom = () => {
   );
 };
 
-const Checkout = () => {};
+const Checkout = () => {
+  return (
+    <div>
+      <CheckoutFrom></CheckoutFrom>
+    </div>
+  );
+};
 
 export default Checkout;
