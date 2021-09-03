@@ -50,3 +50,5 @@ export default function useForm(initial: FormTypes = {}) {
   }
   return { inputs, handleChange, resetForm, clearForm };
 }
+
+// tests should be written
