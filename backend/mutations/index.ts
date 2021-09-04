@@ -1,7 +1,7 @@
 import { graphQLSchemaExtension } from '@keystone-next/keystone/schema';
 import addToCart from './addToCart';
 
-const graphql = String.raw;
+const graphql = String.raw
 
 export const extendGraphQLSchema = graphQLSchemaExtension({
   typeDefs: graphql`
