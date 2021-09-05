@@ -1,8 +1,14 @@
 import * as React from 'react';
-import { CardElement, Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
+import {
+  CardElement,
+  Elements,
+  useElements,
+  useStripe,
+} from '@stripe/react-stripe-js';
+import { loadStripe, StripeError } from '@stripe/stripe-js';
 import styled from 'styled-components';
 import CommerceButton from './styles/CommerceButton';
+import nProgress from 'nprogress';
 
 const CheckoutFormStyles = styled.form`
   box-shadow: 0 1px 2px 2px rgba(0, 0, 0, 0.4);
@@ -15,25 +21,45 @@ const CheckoutFormStyles = styled.form`
 const stripeLib = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
 
 const CheckoutFrom = () => {
-  const handleSubmit = (e) => {
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState<StripeError | null>();
+  const stripe = useStripe();
+  const elements = useElements();
+  const handleSubmit = async (e) => {
+    //1. Stop the form the submitting & turn the loader on
     e.preventDefault();
+    setLoading(true);
     console.log('Series business is about to start');
+    nProgress.start();
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
+      type: 'card',
+      card: elements.getElement(CardElement),
+    });
+    console.log(paymentMethod);
+    if (error) {
+      setError(error);
+    }
+    // Code goes here
+
+    setLoading(false);
+    nProgress.done();
   };
   return (
-    <Elements stripe={stripeLib}>
-      <CheckoutFormStyles onSubmit={handleSubmit}>
-        <CardElement />
-        <CommerceButton type="submit">Checkout Now</CommerceButton>
-      </CheckoutFormStyles>
-    </Elements>
+    <CheckoutFormStyles onSubmit={handleSubmit}>
+      {error && (
+        <p style={{ fontSize: '1.5rem', color: 'red' }}>{error.message}</p>
+      )}
+      <CardElement />
+      <CommerceButton type="submit">Checkout Now</CommerceButton>
+    </CheckoutFormStyles>
   );
 };
 
 const Checkout = () => {
   return (
-    <div>
+    <Elements stripe={stripeLib}>
       <CheckoutFrom></CheckoutFrom>
-    </div>
+    </Elements>
   );
 };
 
