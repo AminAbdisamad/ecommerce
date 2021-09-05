@@ -9,6 +9,10 @@ export const User = list({
     email: text({ isRequired: true, isUnique: true }),
     isAdmin: checkbox(),
     password: password(),
+    orders: relationship({
+      ref: 'Order.user',
+      many: true,
+    }),
     cart: relationship({
       ref: 'CartItem.user',
       many: true,
