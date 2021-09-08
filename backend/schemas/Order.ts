@@ -8,7 +8,7 @@ export const Order = list({
       // its not stored in the database
 
       graphQLReturnType: 'String',
-      resolver(item) {
+      resolver(item: any) {
         return item.total;
       },
     }),
