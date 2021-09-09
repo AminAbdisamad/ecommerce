@@ -16,3 +16,14 @@ export default function ProductPage() {
     </>
   );
 }
+
+// named export
+// default export
+
+export const x = () => {
+  return (
+    <div>
+      <h1>Hello</h1>
+    </div>
+  );
+};
