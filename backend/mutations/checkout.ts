@@ -1,6 +1,8 @@
 import { KeystoneContext } from '@keystone-next/types';
 import { Session } from '../types';
 
+const graphQL = String.raw;
+
 export const checkout = async (
   root: any,
   { token }: { token: string },
@@ -17,7 +19,9 @@ export const getUserByEmail = async (
     where: {
       email,
     },
-    resolveFields: 'id,name,email',
+    resolveFields: graphQL`
+
+    `,
   });
   console.log(user);
   if (!user) {
