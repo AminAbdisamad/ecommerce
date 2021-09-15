@@ -1,4 +1,5 @@
 import { KeystoneContext } from '@keystone-next/types';
+import { OrderCreateInput } from '../.keystone/schema-types';
 import { Session } from '../types';
 
 const graphQL = String.raw;
@@ -7,28 +8,11 @@ export const checkout = async (
   root: any,
   { token }: { token: string },
   context: KeystoneContext
-): Promise<any> => {
+): Promise<OrderCreateInput> => {
   // Get check signedin user
+  const userId = context.session.itemId;
+  console.log(userId);
+  if (!userId) {
+    throw new Error('You need logged in to process this task');
+  }
 };
-
-// export const getUserByEmail = async (
-//   root: any,
-//   { email }: { email: string }
-//   context: KeystoneContext
-// ): Promise<any> => {
-//   const user = context.lists.User.findOne({
-//     where: {
-//       email,
-//     },
-//     resolveFields: graphQL`
-
-//     `,
-//   });
-//   console.log(user);
-//   if (!user) {
-//     return `Sorry a user with the email of ${user.email} doesnt exist`;
-//   }
-//   return user;
-// };
-
-// https://www.gittigidiyor.com/cart-login?returnUrl=%2Fsepetim%2Fsubmit-after-login%3FdiscountId%3D0%26cartItemIds%255B0%255D%3D490113302
