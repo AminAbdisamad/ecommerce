@@ -1,4 +1,5 @@
 import { graphQLSchemaExtension } from '@keystone-next/keystone/schema';
+import { OrderCreateInput } from '../.keystone/schema-types';
 import addToCart from './addToCart';
 import { checkout, getUserByEmail } from './checkout';
 
@@ -10,7 +11,7 @@ export const extendGraphQLSchema = graphQLSchemaExtension({
       addToCart(productId: ID): CartItem
     }
     type Mutation {
-      checkout(token: String): OrderItem
+      checkout(token: String!): Order
     }
     type Query {
       getUserByEmail(email: String): User
