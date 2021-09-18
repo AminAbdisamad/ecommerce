@@ -1,3 +1,38 @@
+// query{
+// 	Order(where:{id:"6143d73e33ed207e8c8b41cd"}){
+
+//     id
+//     total
+//     charge
+
+//     user{
+//       name
+//       email
+//       isAdmin
+//     }
+//     items{
+//     name
+//     description
+//     price
+//     quantity
+//       photo{
+//         id
+//         image{
+//           publicUrlTransformed
+//         }
+//       }
+//     }
+
+//   }
+// }
+
+export interface OrderType {
+  id: string;
+  total: number;
+  charge: string;
+  items: ProductTypes[] | null;
+  user: AuthenticatedItem;
+}
 export interface ProductTypes {
   id: string;
   name: string;
