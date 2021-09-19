@@ -83,7 +83,9 @@ const Order: React.FC<{ id: string }> = ({ id }) => {
                 <h3>{item.name}</h3>
               </li>
               <li>{item.description}</li>
-              <li>{formatMoney(item.price)}</li>
+              <li>
+                {formatMoney(item.price)} &times;{item.quantity}{' '}
+              </li>
             </ul>
           </div>
         ))}
