@@ -11,6 +11,9 @@ import CommerceButton from './styles/CommerceButton';
 import nProgress from 'nprogress';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
+import { useRouter } from 'next/router';
+import { useCart } from '../lib/globalState';
+import { CURRENT_USER } from './User';
 
 const CheckoutFormStyles = styled.form`
   box-shadow: 0 1px 2px 2px rgba(0, 0, 0, 0.4);
@@ -23,6 +26,7 @@ const CheckoutFormStyles = styled.form`
 const CHECKOUT_MUTATION = gql`
   mutation CHECKOUT_MUTATION($token: String!) {
     checkout(token: $token) {
+      id
       total
       charge
       items {
@@ -40,7 +44,11 @@ const stripeLib = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
 const CheckoutFrom = () => {
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<StripeError | null>();
-  const [checkout, { error: graphQLError }] = useMutation(CHECKOUT_MUTATION);
+  const [checkout, { error: graphQLError }] = useMutation(CHECKOUT_MUTATION, {
+    refetchQueries: [{ query: CURRENT_USER }],
+  });
+  const router = useRouter();
+  const { closeCart } = useCart();
   const stripe = useStripe();
   const elements = useElements();
 
@@ -64,6 +72,16 @@ const CheckoutFrom = () => {
     // Code goes here
     const order = await checkout({ variables: { token: paymentMethod.id } });
     console.log('Displaying orders');
+
+    // Direct to order page
+    router.push({
+      pathname: '/order',
+      query: { id: order.data.checkout.id },
+    });
+
+    // Close the cart
+    closeCart();
+
     console.log(order);
     setLoading(false);
     nProgress.done();

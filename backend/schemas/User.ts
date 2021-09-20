@@ -17,6 +17,9 @@ export const User = list({
       ref: 'CartItem.user',
       many: true,
     }),
+    role: relationship({
+      ref: 'Role.assignedTo',
+    }),
   },
 
   ui: {
