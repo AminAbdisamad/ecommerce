@@ -16,6 +16,7 @@ import 'dotenv/config';
 import { insertSeedData } from './data';
 import { sendPasswordResetEmail } from './lib/mail';
 import { extendGraphQLSchema } from './mutations';
+import { permissionsList } from './schemas/fields';
 
 const databaseURL = process.env.DATABASE_URL as string;
 
@@ -75,7 +76,7 @@ export default withAuth(
       },
     },
     session: withItemData(statelessSessions(sessionConfig), {
-      user: 'id',
+      user: `id name email role{ ${permissionsList.join(' ')} }`,
     }),
   })
 );
