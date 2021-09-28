@@ -14,3 +14,5 @@ export const permissions = {
   ...generatePermissions,
   //   add extra permisions
 };
+
+const fn = (message) => message;
