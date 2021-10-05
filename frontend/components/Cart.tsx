@@ -1,12 +1,12 @@
-import useUser from './User';
-import CartStyles from './styles/CartStyles';
-import Supreme from './styles/Supreme';
-import CartItem from './CartItem';
-import formatMoney from '../lib/formatMoney';
-import calculateTotalPrice from '../lib/calculateTotalPrice';
-import { useCart } from '../lib/globalState';
-import CloseButton from './styles/CloseButton';
-import Checkout from './Checkout';
+import useUser from "./User";
+import CartStyles from "./styles/CartStyles";
+import Supreme from "./styles/Supreme";
+import CartItem from "./CartItem";
+import formatMoney from "../lib/formatMoney";
+import calculateTotalPrice from "../lib/calculateTotalPrice";
+import { useCart } from "../lib/globalState";
+import CloseButton from "./styles/CloseButton";
+import Checkout from "./Checkout";
 
 export default function Cart() {
   const { cartOpen, closeCart } = useCart();
@@ -20,7 +20,7 @@ export default function Cart() {
     <CartStyles open={cartOpen}>
       <header>
         <Supreme>{user?.name}'s Cart</Supreme>
-        <CloseButton type="button" onClick={closeCart}>
+        <CloseButton type='button' onClick={closeCart}>
           X
         </CloseButton>
       </header>
