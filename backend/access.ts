@@ -15,4 +15,4 @@ export const permissions = {
   //   add extra permisions
 };
 
-const fn = (message) => message;
+
