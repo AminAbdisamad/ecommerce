@@ -3,7 +3,7 @@ import { OrderCreateInput } from '../.keystone/schema-types';
 import addToCart from './addToCart';
 import { checkout, getUserByEmail } from './checkout';
 
-const graphql = String.raw;
+const graphql = String.raw
 
 export const extendGraphQLSchema = graphQLSchemaExtension({
   typeDefs: graphql`
