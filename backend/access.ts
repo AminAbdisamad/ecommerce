@@ -1,5 +1,5 @@
-import { ListAccessArgs } from './types';
-import { permissionsList } from './schemas/fields';
+import { ListAccessArgs } from "./types";
+import { permissionsList } from "./schemas/fields";
 
 export const isSignedIn = ({ session }: ListAccessArgs): boolean => !!session;
 
@@ -15,4 +15,4 @@ export const permissions = {
   //   add extra permisions
 };
 
-const fn = (message) => message;
+// const fn = (message) => message;
