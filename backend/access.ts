@@ -15,4 +15,13 @@ export const permissions = {
   //   add extra permisions
 };
 
-// const fn = (message) => message;
+export const rules = {
+  // Can Manage Products
+  canManageProducts({ session }: ListAccessArgs) {
+    if (permissions.canManageProducts({ session })) {
+      return true;
+    }
+    // Owned User can manage products
+    return { user: { id: session?.itemId } };
+  },
+};
